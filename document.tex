@@ -12,7 +12,7 @@
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
 \lstset{frame=tb,
-  language=Matlab,
+  language=C++,
   aboveskip=3mm,
   belowskip=3mm,
   showstringspaces=false,
@@ -43,7 +43,24 @@
 \newpage
 
 \section { Pregatire experiment identificare }
-a
+\begin{table}[h!]
+  \centering
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+      head1 & head2 & head3 & head4 \\
+      \hline
+      row11 & row12 & row13 & row13 \\
+      \hline
+      row11 & row12 & row13 & row13 \\
+      \hline
+      row11 & row12 & row13 & row13 \\
+      \hline
+      row11 & row12 & row13 & row13 \\
+      \hline
+    \end{tabular}
+    \caption{Dataset description of the four datasets provided by Rabobank Group ICT.}
+\end{table}
+
 \subsection { Platforma laborator 3 de citit }
 \subsection { Se studiaza fisa de activități }
 \subsection {  }
@@ -55,12 +72,73 @@ a
 \subsubsection { [1p] Comentarii referitor grafice obtinute (scris/audio/video - la alegere) }
 \subsection { Datele masurate salvate (link ?) }
 \subsection { Caracteristici proces }
+\begin{table}[h!]
+  \centering
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+      $t_c$ & $t_t$ & $\tau$ & $T_e\ ales$ \\
+      \hline
+      3.00 [s] & 3.2538 [s] & 0.2 [s] & 0.33 [s] \\
+      \hline
+    \end{tabular}
+    \caption{Caracteristici proces alese experimental.}
+\end{table}
+
 \subsection { Rezolvare Aplicatii Lab 3 }
+Am ales urmatoarele proprietati pentru SPAB:
+N = 511; p = 2
+
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{1_6_1.eps}}
+\end{center}
+
+Algoritm generare SPAB:
+\begin{lstlisting}
+  uint32_t reg = 0b11111 1111; 
+
+  int nr_val = 48; 
+
+  for (int i = 0; i < nr_val; i++) { 
+
+      std::cout << (reg & 1) << ", "; 
+
+      uint8_t last_bit = !!((1 << 0) & reg) != !!((1 << 4) & reg); 
+
+      reg >>= 1; 
+
+      reg = reg | (last_bit << 8); 
+
+  } 
+
+  std::cout << std::endl;
+\end{lstlisting}
+
+Pentru vectorul initial:
+\begin{lstlisting}
+  0b11111'1111
+\end{lstlisting}
+
+Primele 48 valori:
+\begin{lstlisting}
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1
+\end{lstlisting}
 
 \section { REALIZARE SI ANALIZA EXPERIMENT IDENTIFICARE }
 a
 \subsection { Expresia Matlab de generare a semnalului SPAB }
 \subsection { [2p] Caracteristici semnal SPAB de intrare }
+\begin{table}[h!]
+  \centering
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+      Tip semnal aleator & Lungime set date & Durata experiment & Banda de frecvente \\
+      \hline
+      row11 & row12 & row13 & row13 \\
+      \hline
+    \end{tabular}
+    \caption{Caracteristici semnal SPAB}
+\end{table}
+
 \subsection { [3p] Afisare spectrul semnal SPAB de intrare }
 \subsection { [1p] Observatii asupra semnalului SPAB generat }
 \subsection { Realizare experiment identificare (conform instructiunilor din laborator) }
@@ -83,6 +161,18 @@ a
 \subsubsection { Utilizare functie advice: ................. }
 \subsubsection { Utilizare functie delayest: ................. }
 \subsubsection { Estimare complexitate model ARX }
+\begin{table}[h!]
+  \centering
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+      $nA$ & $nB$ & $nk$ \\
+      \hline
+      -1 & -1 & -1 \\
+      \hline
+    \end{tabular}
+    \caption{Caracteristici proces alese experimental.}
+\end{table}
+
 \subsection { Identificare model ARX }
 \subsubsection { Descriere model obținut (structură, coeficienți, etc) }
 \subsubsection { Valorile funcțiilor criteriu }
@@ -112,7 +202,19 @@ a
 \subsection {4.1. [1p] Pregătire date inițiale WINPIM. Fisierul txt obtinut (upload) }
 \subsection {4.2. [1p] Incarcare fisier in WinPIM si specificare perioada de esantionare }
 \subsection {4.3. [1p] Aplicare filtrare set de date (eliminarea componentei continue) }
-\subsection {4.4. [1p] Estimarea comlexitatii}
+\subsection {4.4. [1p] Estimarea complexitatii}
+\begin{table}[h!]
+  \centering
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+      $N$ & $n_A$ & $n_B$ & $d$ \\
+      \hline
+      0 & 0 & 0 & 0 \\
+      \hline
+    \end{tabular}
+    \caption{Caracteristici proces alese experimental.}
+\end{table}
+
 \subsection {4.5. [5p]  Identificare si validare modele }
 \subsection {4.6. [1p] Modelul ales este anexat aici (BXY.mod) }
 \subsection {4.7. [2p] Simulare model ales WinPIM si simulare model ales Matlab. }
@@ -150,7 +252,7 @@ a
 \section { EVALUARE EXPERIMENTALA REGULATOR RST-1 }
 a
 \subsection { 7.1. Evaluare performante pe sistemul real. }
-\subsubsection { Se alege referinta r(t) = ….  a.i. u(t) stationar sa fie egal cu u0. Pentru aceasta referinta s-a stimulat sistemul si s-a aplicat si o perturbatie cand a ajuns in regimul stationar de cca.\%}
+\subsubsection { Se alege referinta r(t) = a.i. u(t) stationar sa fie egal cu u0. Pentru aceasta referinta s-a stimulat sistemul si s-a aplicat si o perturbatie cand a ajuns in regimul stationar de cca.}
 \subsubsection { Rezultatul simularii se afla in imaginea de mai jos: }
 \subsubsection { [2p] Alegand o alta referinta raspunsul sistemului este capturat in figura de mai jos: }
 \subsection { 7.2. Performantele se regasesc rezumate in tabelul urmator }
@@ -168,7 +270,7 @@ a
 \section { Evaluare Experimentala Regulator RST-2 }
 a
 \subsection { 9.1. [3p] Evaluare performante pe sistemul real. }
-\subsubsection { Se alege referinta r(t) = ….  a.i. u(t) stationar sa fie egal cu u0. Pentru aceasta referinta s-a stimulat sistemul si s-a aplicat si o perturbatie cand a ajuns in regimul stationar de cca.\% }
+\subsubsection { Se alege referinta r(t) = a.i. u(t) stationar sa fie egal cu u0. Pentru aceasta referinta s-a stimulat sistemul si s-a aplicat si o perturbatie cand a ajuns in regimul stationar de cca.\% }
 \subsubsection { Rezultatul simularii se afla in imaginea de mai jos: }
 \subsubsection { [2p] Alegand o alta referinta raspunsul sistemului este capturat in figura de mai jos: }
 \subsection { 9.2.[2p] Performantele se regasesc rezumate in tabelul urmator }
