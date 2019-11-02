@@ -103,7 +103,17 @@
 
 \subsection { Rezolvare aplicatii laboratorul 3 }
 Am ales urmatoarele proprietati pentru SPAB:
-N = 511; p = 2
+\begin{table}[h!]
+  \centering
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+      $N$ & $p$ \\
+      \hline
+      9 & 2 \\
+      \hline
+    \end{tabular}
+    \caption{Dataset description of the four datasets provided by Rabobank Group ICT.}
+\end{table}
 
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{1_6_1.eps}}
@@ -137,6 +147,10 @@ Primele 48 valori:
 
 \section { Realizare si analiza experiment identificare }
 \subsection { Expresia Matlab de generare a semnalului SPAB }
+\begin{lstlisting}
+  idinput(510, 'PRBS', [0 1/2], [6 8])
+\end{lstlisting}
+
 \subsection { [2p] Caracteristici semnal SPAB de intrare }
 \begin{table}[H]
   \centering
@@ -144,19 +158,28 @@ Primele 48 valori:
     \hline
     Tip semnal aleator & Lungime set date & Durata experiment & Banda de frecvente \\
     \hline
-    row11 & row12 & row13 & row13 \\
+    SPAB & 762 & 251.46 [s] & [???] \\
     \hline
   \end{tabular}
   \caption{Caracteristici semnal SPAB}
 \end{table}
 
 \subsection { [3p] Afisare spectrul semnal SPAB de intrare }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{2_3_1.eps}}
+\end{center}
+
 \subsection { [1p] Observatii asupra semnalului SPAB generat }
 \subsection { Realizare experiment identificare (conform instructiunilor din laborator) }
 \subsection { Fisier rezultate identificare }
 Numele fisierului este 'B70\_DateExper.mat'. Fiserul este de tip .mat in care este salvat o structura tip iddata care contine intrarea, iesirea si configurarea unor parametri (exp Te).
 \subsection { [3p] Afisare spectrul semnal SPAB de iesire (achizitionat) }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{2_7_1.eps}}
+\end{center}
+
 \subsection { [1p] Observatii asupra semnalului achizitonat }
+Sistemul lui juvel
 
 \section { IDENTIFICARE SI VALIDARE MODEL MATLAB }
 \subsection { Platforma laborator 4 - citită                                  }
