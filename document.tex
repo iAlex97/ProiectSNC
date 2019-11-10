@@ -522,7 +522,7 @@ B = [0.01618 0.04298]
 C = [1 -0.04761 -0.6452 0.3978]
 na=9   nb=2   nc=3   nk=1
 \end{lstlisting}
-Comparativ ca precizie cu bj, dar este mai simplu.
+Comparativ ca precizie cu BJ, dar este mai simplu.
 \subsubsection {Valorile funcțiilor criteriu }
 \begin{lstlisting}
 FPE: 0.004659, MSE: 0.004386
@@ -545,26 +545,155 @@ Atasat proiectului
 TO DO
 
 \section {MODELARE SI IDENTIFICARE FOLOSIND WIMPIM }
-\subsection {4.1. [1p] Pregătire date inițiale WINPIM. Fisierul txt obtinut (upload) }
-\subsection {4.2. [1p] Incarcare fisier in WinPIM si specificare perioada de esantionare }
-\subsection {4.3. [1p] Aplicare filtrare set de date (eliminarea componentei continue) }
-\subsection {4.4. [1p] Estimarea complexitatii}
+\subsection {[1p] Pregătire date inițiale WINPIM. Fisierul txt obtinut (upload) }
+Fisierul txt poate fi gasit la urmatorul path: $./modele\_winpim/B70\_date\_win.txt$
+
+\subsection {[1p] Incarcare fisier in WinPIM si specificare perioada de esantionare }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_incarcare_1.png}}
+\end{center}
+
+\subsection {[1p] Aplicare filtrare set de date (eliminarea componentei continue) }
+Am aplicat filtru pentru eliminarea componentei continue:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/b70_dc.png}}
+\end{center}
+
+In continuare, am aplicat si un filtru Butterworth:
+\begin{equation*}
+  H_{B} =\frac{0.2452+0.2452*z^{-1}}{1-0.5095*z^{-1}}
+\end{equation*}
+
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/b70_butterworth.png}}
+\end{center}
+
+Semnalul rezultat a fost salvat la urmatorul path: $./modele\_winpim/B70\_butterworth.dat$
+
+\subsection {[1p] Estimarea complexitatii}
+
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_estimare_1.png}}
+\end{center}
+
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_estimare_2.png}}
+\end{center}
+
 \begin{table}[H]
   \centering
   \begin{tabular}{|l|l|l|l|}
     \hline
     $N$ & $n_A$ & $n_B$ & $d$ \\
     \hline
-    0 & 0 & 0 & 0 \\
+    2 & 2 & 1 & 1 \\
     \hline
   \end{tabular}
   \caption{Caracteristici proces alese experimental.}
 \end{table}
 
-\subsection {4.5. [5p]  Identificare si validare modele }
-\subsection {4.6. [1p] Modelul ales este anexat aici (BXY.mod) }
-\subsection {4.7. [2p] Simulare model ales WinPIM si simulare model ales Matlab. }
-\subsection {4.8. [2p]  Graficele simularilor sunt disponibile aici .  }
+\subsection {[5p] Identificare si validare modele }
+\subsubsection {Identificare si validare modele ARX}
+Am variat parametrii pana am obtinut un model ce trecea ambele teste:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_arx_1.png}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_arx_2.png}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_arx_3.png}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_arx_4.png}}
+\end{center}
+
+Testul:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_arx_4_test1.png}}
+\end{center}
+
+Comparatie intre iesirea sistemului si iesirea modelului ARX:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/arx_out.png}}
+\end{center}
+
+\subsubsection {Identificare si validare modele OE}
+Am variat parametrii:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_oe_1.png}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_oe_2.png}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_oe_3.png}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_oe_4.png}}
+\end{center}
+
+Testul:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_oe_4_test1.png}}
+\end{center}
+
+Comparatie intre iesirea sistemului si iesirea modelului OE:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/oe_out.png}}
+\end{center}
+
+\subsubsection {Identificare si validare modele ARMAX}
+Am variat parametrii pana am obtinut un model ce trecea ambele teste:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_armax_212.png}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_armax_313.png}}
+\end{center}
+
+Testul:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_armax_313_test1.png}}
+\end{center}
+
+Comparatie intre iesirea sistemului si iesirea modelului ARMAX:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/armax_out.png}}
+\end{center}
+
+\subsubsection {Identificare si validare modele ARIMAX}
+Am variat parametrii pana am obtinut un model ce trecea ambele teste:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_arimax_212.png}}
+\end{center}
+
+Testul:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_ident_arimax_212_test1.png}}
+\end{center}
+
+Comparatie intre iesirea sistemului si iesirea modelului ARIMAX:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winpim/arimax_out.png}}
+\end{center}
+
+\subsection {Modelul ales este anexat aici (BXY.mod) }
+Din experimentele de identificare si validare am ajuns la concluzia ca modelele $ARMAX$ si $ARIMAX$ au oferit cele mai bune performante. Dintre acestea, am ales modelul $ARIMAX$ datorita gradului de complexitate mai redus.
+Fisierul poate fi gasit la: $./modele\_winpim/arimax.mod$
+
+Model ARIMAX:
+\[ y[k] = q^-1 \dfrac{B(q^-1)}{A(q^-1)}u[k] + \dfrac{C(q^-1)}{A(q^-1)}e[k] \]
+
+\begin{lstlisting}
+A = [1 -1.36248 0.61965 -0.09122]
+B = [0.06305]
+C = [1 -0.28752 -0.05547 0.00307]
+na=3   nb=1   nc=3   nk=1
+\end{lstlisting}
+
+\subsection {4.7. Simulare model ales WinPIM si simulare model ales Matlab. }
+\subsection {4.8. Graficele simularilor sunt disponibile aici .  }
 \subsection {4.9. Modelul final ales pentru continuarea proiectului este: }
 
 \section {CALCUL REGULATOR RST-1, SIMULARE SI VALIDARE }
