@@ -3,9 +3,9 @@
 int main(int argc, char const *argv[])
 {
 	uint32_t reg = 0b11111'1111;
-	int nr_val = 48;
+	int nr_val = 511;
 	for (int i = 0; i < nr_val; i++) {
-		std::cout << (reg & 1) << ", ";
+		std::cout << (reg & 1) << " ";
 
 		uint8_t last_bit = !!((1 << 0) & reg) != !!((1 << 4) & reg);
 		reg >>= 1;

@@ -146,7 +146,14 @@ Primele 48 valori:
   1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1
 \end{lstlisting}
 
-TO DO - afisare spab (pornim chestie.cpp si ne da 512 valori => grafic)
+Spab generat manual:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{1_6_2.eps}}
+\end{center}
+Fft spab generat manual:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{1_6_3.eps}}
+\end{center}
 
 % Section 2
 \section {Realizare si analiza experiment identificare }
@@ -162,7 +169,7 @@ TO DO - afisare spab (pornim chestie.cpp si ne da 512 valori => grafic)
     \hline
     Tip semnal aleator & Lungime set date & Durata experiment & Banda de frecvente \\
     \hline
-    SPAB & 762 & 251.46 [s] & [???] \\
+    SPAB & 762 & 251.46 [s] & $\pm 3Hz$ \\
     \hline
   \end{tabular}
   \caption{Caracteristici semnal SPAB}
@@ -198,7 +205,7 @@ Se determina prin stimularea procesului cu diferite intrari de tip treapta pozit
 Diferenta consta in filtrul perturbatiei $v$. Pentru modelul ARIMAX filtrul este $\dfrac{1}{C(q^-1)A(q^-1)}$, iar pentru ARMAX acesta este $\dfrac{C(q^-1)}{A(q^-1)}$.
 
 \subsubsection {Intrebare pertinenta}
-TO DO
+In ce masura ar putea fii un model real aproximat de modele de diferite tipuri pe portiuni. Spre exemplu, in ce masura ar putea un model sa isi modifice comportamentul pe masura ce timpul trece sub actiunea unei comenzi de tip treapta.
 
 \subsection {Filtrare semnale achiziționate in urma experimentului de identificare. }
 \subsubsection {Functii Matlab apelate pentru filtrari: }
@@ -216,7 +223,7 @@ TO DO
   \fbox{ \includegraphics[width=0.8\textwidth]{3_3_2.eps}}
 \end{center}
 \subsubsection {[1p] Comentarii asupra spectrului }
-TO DO - In esenta a disparut spike-ul
+Spectrul ajunge sa piarda frecventele afectate de filtru, insemnand ca o parte din zgomote sunt filtrate si cel mai observabil acesta pierde spike-ul in urma modificarii ofsetului.
 \subsection {Seturile de date de identificare Matlab - iddata pentru identificare si validare. }
 \begin{lstlisting}
 length(flt_data) % 762
@@ -319,25 +326,7 @@ nn = selstruc(V)
 \subsection {Identificare model ARX }
 Am adaugat asta aici 
 \begin{lstlisting}
->> sys_arx = arx(flt_idata, nn)                       
-
-sys_arx =
-Discrete-time ARX model:  A(z)y(t) = B(z)u(t) + e(t)
-
-  A(z) = 1 - 1.545 z^-1 + 1.271 z^-2 - 1.086 z^-3 + 0.9689 z^-4 - 0.8194 z^-5 + 0.669 z^-6 - 0.4828 z^-7 + 0.265 z^-8 - 0.09378 z^-9
-                                                                                         
-  B(z) = 0.01325 z^-1 + 0.04868 z^-2                                                                                                          
-Sample time: 0.33 seconds
-  
-Parameterization:
-   Polynomial orders:   na=9   nb=2   nk=1
-   Number of free coefficients: 11
-   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
-
-Status:                                             
-Estimated using ARX on time domain data "flt_idata".
-Fit to estimation data: 75.71% (prediction focus)   
-FPE: 0.005476, MSE: 0.005196 
+>> sys_arx = arx(flt_idata, nn)
 \end{lstlisting}
 
 \subsubsection {Descriere model obținut (structură, coeficienți, etc) }
@@ -365,27 +354,6 @@ FPE: 0.005476, MSE: 0.005196
 \subsection {[3p] Identificare model ARMAX }
 \begin{lstlisting}
 >> sys_armax = armax(flt_idata, [nn(1) nn(2) 3 nn(3)])
-
-sys_armax =
-Discrete-time ARMAX model:  A(z)y(t) = B(z)u(t) + C(z)e(t)
-
-  A(z) = 1 - 1.552 z^-1 + 0.8733 z^-2 - 0.1739 z^-3 - 0.01457 z^-4 - 0.009968 z^-5 + 0.01775 z^-6 + 0.01726 z^-7 - 0.05527 z^-8 + 0.02293 z^-9   
-
-  B(z) = 0.01618 z^-1 + 0.04298 z^-2                                       
-
-  C(z) = 1 - 0.04761 z^-1 - 0.6452 z^-2 + 0.3978 z^-3
-
-Sample time: 0.33 seconds
-  
-Parameterization:
-   Polynomial orders:   na=9   nb=2   nc=3   nk=1
-   Number of free coefficients: 14
-   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
-
-Status:                                               
-Estimated using ARMAX on time domain data "flt_idata".
-Fit to estimation data: 77.68% (prediction focus)     
-FPE: 0.004659, MSE: 0.004386  
 \end{lstlisting}
 \subsubsection {Descriere model obținut (structură, coeficienți, etc) }
 \[ y[k] = q^-1 \dfrac{B(q^-1)}{A(q^-1)}u[k] + \dfrac{C(q^-1)}{A(q^-1)}e[k] \]
@@ -413,27 +381,6 @@ FPE: 0.004659, MSE: 0.004386
 \subsection {[3p] Identificare model BJ }
 \begin{lstlisting}
 >> sys_bj = bj(flt_idata, [nn(2) 5 6 6 nn(3)])
-
-sys_bj =
-Discrete-time BJ model:  y(t) = [B(z)/F(z)]u(t) + [C(z)/D(z)]e(t)                          
-  B(z) = 0.01746 z^-1 + 0.0368 z^-2
-                                                                                           
-  C(z) = 1 - 0.005233 z^-1 - 0.09159 z^-2 + 0.4298 z^-3 - 0.7975 z^-4 - 0.3137 z^-5                                                                                           
-  D(z) = 1 - 1.492 z^-1 + 1.314 z^-2 - 0.8559 z^-3 - 0.12 z^-4 + 0.1427 z^-5 + 0.04877 z^-6
-
-  F(z) = 1 - 1.75 z^-1 + 1.319 z^-2 - 0.54 z^-3 + 0.001966 z^-4 + 0.188 z^-5 - 0.1157 z^-6 
-                                                                                           
-Sample time: 0.33 seconds
-  
-Parameterization:
-   Polynomial orders:   nb=2   nc=5   nd=6   nf=6   nk=1
-   Number of free coefficients: 19
-   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
-
-Status:                                            
-Estimated using BJ on time domain data "flt_idata".
-Fit to estimation data: 77.99% (prediction focus)  
-FPE: 0.004628, MSE: 0.004266 
 \end{lstlisting}
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
 \[ y[k] = q^-1 \dfrac{B(q^-1)}{F(q^-1)}u[k] + \dfrac{C(q^-1)}{D(q^-1)}e[k] \]
@@ -463,23 +410,6 @@ FPE: 0.004628, MSE: 0.004266
 
 \begin{lstlisting}
 >> sys_oe = oe(flt_idata, [nn(2) 9 nn(3)]) 
-
-sys_oe =
-Discrete-time OE model:  y(t) = [B(z)/F(z)]u(t) + e(t)                                                                      
-  B(z) = 0.01363 z^-1 + 0.04363 z^-2
-  F(z) = 1 - 1.622 z^-1 + 1.043 z^-2 - 0.3599 z^-3 + 0.2136 z^-4 - 0.5075 z^-5 + 0.8735 z^-6 - 0.896 z^-7 + 0.4862 z^-8 0.1123 z^-9
-                                                                                          
-Sample time: 0.33 seconds
-  
-Parameterization:
-   Polynomial orders:   nb=2   nf=9   nk=1
-   Number of free coefficients: 11
-   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
-
-Status:                                            
-Estimated using OE on time domain data "flt_idata".
-Fit to estimation data: 53.09%                     
-FPE: 0.02042, MSE: 0.01937
 \end{lstlisting}
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
 \[ y[k] = q^-1 \dfrac{B(q^-1)}{F(q^-1)}u[k] + e[k] \]
@@ -522,7 +452,8 @@ B = [0.01618 0.04298]
 C = [1 -0.04761 -0.6452 0.3978]
 na=9   nb=2   nc=3   nk=1
 \end{lstlisting}
-Comparativ ca precizie cu BJ, dar este mai simplu.
+Modelul ARMAX are precizia usor mai mica decat modelul BJ, dar acesta este considerabil mai simplu.
+
 \subsubsection {Valorile funcțiilor criteriu }
 \begin{lstlisting}
 FPE: 0.004659, MSE: 0.004386
@@ -534,7 +465,7 @@ FPE: 0.004659, MSE: 0.004386
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_2.eps}}
 \end{center}
-\subsubsection {[1p] Studiul stabilității sistemului: ........... }
+\subsubsection {[1p] Studiul stabilității sistemului: }
 Systemul este stabil:
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_10_4_1.eps}}
@@ -542,7 +473,8 @@ Systemul este stabil:
 \subsubsection {Modelul Matlab ales încărcat este disponibil}
 Atasat proiectului
 \subsubsection {Comentarii/Observații }
-TO DO
+In afara de OE toate celelalte modele se apropie comparabil de mult cu procesul masurat. ARMAX si BJ sunt mai precise decat ARX, dar Final Precision Error cat si Mean Square Error sunt de acelasi ordin de marime.
+TO DO - more?
 
 \section {MODELARE SI IDENTIFICARE FOLOSIND WIMPIM }
 \subsection {[1p] Pregătire date inițiale WINPIM. Fisierul txt obtinut (upload) }
