@@ -226,11 +226,11 @@ vData = flt_data(509:762)
 
 \subsubsection {eData  (upload) }
 \begin{lstlisting}
-save(‘70BY_IdentData’,’eData’);
+save("70BY_IdentData", "eData");
 \end{lstlisting}
 \subsubsection {vData  (upload) }
 \begin{lstlisting}
-save(‘70BY_ValidationData’,’vData’);
+save("70BY_ValidationData", "vData");
 \end{lstlisting}
 \subsection {[2p] Estimarea complexității model ARX }
 \begin{lstlisting}
@@ -341,15 +341,26 @@ FPE: 0.005476, MSE: 0.005196
 \end{lstlisting}
 
 \subsubsection {Descriere model obținut (structură, coeficienți, etc) }
-TO DO
+\[ y[k] = q^-1 \dfrac{B(q^-1)}{A(q^-1)}u[k] + \dfrac{1}{A(q^-1)}e[k] \]
+
+\begin{lstlisting}
+A = [1 -1.545 1.271 -1.086 0.9689 -0.8194 0.669 -0.4828 0.265 -0.09378]
+B = [0.01325 0.04868]
+na=9   nb=2   nk=1
+\end{lstlisting}
 \subsubsection {Valorile funcțiilor criteriu }
-TO DO
+\begin{lstlisting}
+FPE: 0.005476, MSE: 0.005196
+\end{lstlisting}
 \subsubsection {Figurile obținute in urma validării ( resid \& compare) (vezi App Laborator 4) }
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_6_3_1.eps}}
 \end{center}
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_6_3_2.eps}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_6_3_3.eps}}
 \end{center}
 \subsection {[3p] Identificare model ARMAX }
 \begin{lstlisting}
@@ -362,7 +373,7 @@ Discrete-time ARMAX model:  A(z)y(t) = B(z)u(t) + C(z)e(t)
 
   B(z) = 0.01618 z^-1 + 0.04298 z^-2                                       
 
-  C(z) = 1 - 0.04761 z^-1 - 0.6452 z^-2 + 0.3978 z^-3                                                                           
+  C(z) = 1 - 0.04761 z^-1 - 0.6452 z^-2 + 0.3978 z^-3
 
 Sample time: 0.33 seconds
   
@@ -377,15 +388,27 @@ Fit to estimation data: 77.68% (prediction focus)
 FPE: 0.004659, MSE: 0.004386  
 \end{lstlisting}
 \subsubsection {Descriere model obținut (structură, coeficienți, etc) }
-TO DO
+\[ y[k] = q^-1 \dfrac{B(q^-1)}{A(q^-1)}u[k] + \dfrac{C(q^-1)}{A(q^-1)}e[k] \]
+
+\begin{lstlisting}
+A = [1 -1.552 0.8733 -0.1739 -0.01457 -0.009968 0.01775 0.01726 0.05527 0.02293]
+B = [0.01618 0.04298]
+C = [1 -0.04761 -0.6452 0.3978]
+na=9   nb=2   nc=3   nk=1
+\end{lstlisting}
 \subsubsection {Valorile funcțiilor criteriu }
-TO DO
+\begin{lstlisting}
+FPE: 0.004659, MSE: 0.004386
+\end{lstlisting}
 \subsubsection {Figurile obținute in urma validării ( resid \& compare) (vezi App Laborator 4) }
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_1.eps}}
 \end{center}
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_2.eps}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_3.eps}}
 \end{center}
 \subsection {[3p] Identificare model BJ }
 \begin{lstlisting}
@@ -413,15 +436,28 @@ Fit to estimation data: 77.99% (prediction focus)
 FPE: 0.004628, MSE: 0.004266 
 \end{lstlisting}
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
-TO DO
+\[ y[k] = q^-1 \dfrac{B(q^-1)}{F(q^-1)}u[k] + \dfrac{C(q^-1)}{D(q^-1)}e[k] \]
+
+\begin{lstlisting}
+B = [0.01618 0.04298]
+C = [1 -0.04761 0.6452 0.3978]
+D = [1 -1.492 1.314 -0.8559 -0.12 0.1427 0.04877]
+F = [1 -1.75 1.319 -0.54 0.001966 0.188 -0.1157]
+nb=2   nc=5   nd=6   nf=6   nk=1
+\end{lstlisting}
 \subsubsection {Valorile funcțiilor criteriu }
-TO DO
+\begin{lstlisting}
+FPE: 0.004628, MSE: 0.004266
+\end{lstlisting}
 \subsubsection {Figurile obținute in urma validării ( resid \& compare) (vezi App Laborator 4) }
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_8_3_1.eps}}
 \end{center}
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_8_3_2.eps}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_8_3_3.eps}}
 \end{center}
 \subsection {[3p] Identificare model OE }
 
@@ -446,9 +482,17 @@ Fit to estimation data: 53.09%
 FPE: 0.02042, MSE: 0.01937
 \end{lstlisting}
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
-TO DO
+\[ y[k] = q^-1 \dfrac{B(q^-1)}{F(q^-1)}u[k] + e[k] \]
+
+\begin{lstlisting}
+B = [0.01363 0.04363]
+F = [1 -1.622 1.043 -0.3599 0.2136 -0.5075 0.8735 -0.896 0.4862 0.1123]
+nb=2   nf=9   nk=1
+\end{lstlisting}
 \subsubsection {Valorile funcțiilor criteriu }
-TO DO
+\begin{lstlisting}
+FPE: 0.02042, MSE: 0.01937
+\end{lstlisting}
 \subsubsection {Figurile obținute in urma validării ( resid \& compare) (vezi App Laborator 4) }
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_9_3_1.eps}}
@@ -456,17 +500,47 @@ TO DO
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_9_3_2.eps}}
 \end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_9_3_3.eps}}
+\end{center}
+
 \subsection {Alegere Model Final Matlab }
+Raspuns indicial model:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_10_1.eps}}
+\end{center}
+Raspuns indicial real:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_10_2.eps}}
+\end{center}
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
-TO DO
+\[ y[k] = q^-1 \dfrac{B(q^-1)}{A(q^-1)}u[k] + \dfrac{C(q^-1)}{A(q^-1)}e[k] \]
+
+\begin{lstlisting}
+A = [1 -1.552 0.8733 -0.1739 -0.01457 -0.009968 0.01775 0.01726 0.05527 0.02293]
+B = [0.01618 0.04298]
+C = [1 -0.04761 -0.6452 0.3978]
+na=9   nb=2   nc=3   nk=1
+\end{lstlisting}
+Comparativ ca precizie cu bj, dar este mai simplu.
 \subsubsection {Valorile funcțiilor criteriu }
-TO DO
+\begin{lstlisting}
+FPE: 0.004659, MSE: 0.004386
+\end{lstlisting}
 \subsubsection {Figurile obținute în urma validării (resid \& compare) }
-TO DO
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_1.eps}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_2.eps}}
+\end{center}
 \subsubsection {[1p] Studiul stabilității sistemului: ........... }
-TO DO
-\subsubsection {Modelul Matlab ales încărcat este disponibil ?aici?. }
-TO DO
+Systemul este stabil:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_10_4_1.eps}}
+\end{center}
+\subsubsection {Modelul Matlab ales încărcat este disponibil}
+Atasat proiectului
 \subsubsection {Comentarii/Observații }
 TO DO
 
