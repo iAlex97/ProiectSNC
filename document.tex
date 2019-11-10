@@ -146,7 +146,14 @@ Primele 48 valori:
   1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1
 \end{lstlisting}
 
-TO DO - afisare spab (pornim chestie.cpp si ne da 512 valori => grafic)
+Spab generat manual:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{1_6_2.eps}}
+\end{center}
+Fft spab generat manual:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{1_6_3.eps}}
+\end{center}
 
 % Section 2
 \section {Realizare si analiza experiment identificare }
@@ -162,7 +169,7 @@ TO DO - afisare spab (pornim chestie.cpp si ne da 512 valori => grafic)
     \hline
     Tip semnal aleator & Lungime set date & Durata experiment & Banda de frecvente \\
     \hline
-    SPAB & 762 & 251.46 [s] & [???] \\
+    SPAB & 762 & 251.46 [s] & $\pm 3Hz$ \\
     \hline
   \end{tabular}
   \caption{Caracteristici semnal SPAB}
@@ -198,7 +205,7 @@ Se determina prin stimularea procesului cu diferite intrari de tip treapta pozit
 Diferenta consta in filtrul perturbatiei $v$. Pentru modelul ARIMAX filtrul este $\dfrac{1}{C(q^-1)A(q^-1)}$, iar pentru ARMAX acesta este $\dfrac{C(q^-1)}{A(q^-1)}$.
 
 \subsubsection {Intrebare pertinenta}
-TO DO
+In ce masura ar putea fii un model real aproximat de modele de diferite tipuri pe portiuni. Spre exemplu, in ce masura ar putea un model sa isi modifice comportamentul pe masura ce timpul trece sub actiunea unei comenzi de tip treapta.
 
 \subsection {Filtrare semnale achiziționate in urma experimentului de identificare. }
 \subsubsection {Functii Matlab apelate pentru filtrari: }
@@ -216,7 +223,7 @@ TO DO
   \fbox{ \includegraphics[width=0.8\textwidth]{3_3_2.eps}}
 \end{center}
 \subsubsection {[1p] Comentarii asupra spectrului }
-TO DO - In esenta a disparut spike-ul
+Spectrul ajunge sa piarda frecventele afectate de filtru, insemnand ca o parte din zgomote sunt filtrate si cel mai observabil acesta pierde spike-ul in urma modificarii ofsetului.
 \subsection {Seturile de date de identificare Matlab - iddata pentru identificare si validare. }
 \begin{lstlisting}
 length(flt_data) % 762
@@ -445,7 +452,7 @@ B = [0.01618 0.04298]
 C = [1 -0.04761 -0.6452 0.3978]
 na=9   nb=2   nc=3   nk=1
 \end{lstlisting}
-Comparativ ca precizie cu bj, dar este mai simplu.
+Modelul ARMAX are precizia usor mai mica decat modelul BJ, dar acesta este considerabil mai simplu.
 \subsubsection {Valorile funcțiilor criteriu }
 \begin{lstlisting}
 FPE: 0.004659, MSE: 0.004386
@@ -465,7 +472,8 @@ Systemul este stabil:
 \subsubsection {Modelul Matlab ales încărcat este disponibil}
 Atasat proiectului
 \subsubsection {Comentarii/Observații }
-TO DO
+In afara de OE toate celelalte modele se apropie comparabil de mult cu procesul masurat. ARMAX si BJ sunt mai precise decat ARX, dar Final Precision Error cat si Mean Square Error sunt de acelasi ordin de marime.
+TO DO - more?
 
 \section {MODELARE SI IDENTIFICARE FOLOSIND WIMPIM }
 \subsection {4.1. [1p] Pregătire date inițiale WINPIM. Fisierul txt obtinut (upload) }
