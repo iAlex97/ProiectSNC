@@ -146,6 +146,8 @@ Primele 48 valori:
   1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1
 \end{lstlisting}
 
+TO DO - afisare spab (pornim chestie.cpp si ne da 512 valori => grafic)
+
 % Section 2
 \section {Realizare si analiza experiment identificare }
 \subsection {Expresia Matlab de generare a semnalului SPAB }
@@ -205,8 +207,8 @@ TO DO
   tr = getTrend(idata, 1)
   data_d = detrend(idata, tr);
 
-  flt = butter(1, 0.2)
-  flt_data = filter(flt(1), flt(2), data_d.OutputData)
+  [b, a] = butter(1, 0.2)
+  flt_data = filter(b, a, data_d.OutputData)
   plotFreq(flt_data, 0.33)
 \end{lstlisting}
 \subsubsection {[2p] Spectru semnale filtrate: }
@@ -242,7 +244,7 @@ v_idata = iddata(vData, data_d.InputData(509:762), 0.33)
 General data characteristics:
 -----------------------------
 This is a time domain data set with 1 input(s) and 1 output(s),
-254 samples and 1 experiment(s).
+762 samples and 1 experiment(s).
 
 All inputs in the data have been denoted as 'zero order hold' ('zoh'), i.e. they are
 assumed to be piecewise constant over the sample time.
@@ -285,51 +287,188 @@ Possibility of nonlinearity:
 ----------------------------
 There is no clear indication of nonlinearities in this data set.
 Use the "isnlarx" command to perform the assessment of nonlinearity with more options.
+
 \end{lstlisting}
 
 \subsubsection {Utilizare functie delayest: }
 \begin{lstlisting}
 ans =
 
-     1
+     2
 \end{lstlisting}
 
 \subsubsection {Estimare complexitate model ARX }
+\begin{lstlisting}
+NN = struc(1:10,1:10,0:2);
+V = arxstruc(e_idata, v_idata, NN)
+nn = selstruc(V)
+\end{lstlisting}
+
 \begin{table}[H]
   \centering
     \begin{tabular}{|l|l|l|l|}
       \hline
       $nA$ & $nB$ & $nk$ \\
       \hline
-      -1 & -1 & -1 \\
+      9 & 2 & 1 \\
       \hline
     \end{tabular}
     \caption{Caracteristici proces alese experimental.}
 \end{table}
 
 \subsection {Identificare model ARX }
+Am adaugat asta aici 
+\begin{lstlisting}
+>> sys_arx = arx(flt_idata, nn)                       
+
+sys_arx =
+Discrete-time ARX model:  A(z)y(t) = B(z)u(t) + e(t)
+
+  A(z) = 1 - 1.545 z^-1 + 1.271 z^-2 - 1.086 z^-3 + 0.9689 z^-4 - 0.8194 z^-5 + 0.669 z^-6 - 0.4828 z^-7 + 0.265 z^-8 - 0.09378 z^-9
+                                                                                         
+  B(z) = 0.01325 z^-1 + 0.04868 z^-2                                                                                                          
+Sample time: 0.33 seconds
+  
+Parameterization:
+   Polynomial orders:   na=9   nb=2   nk=1
+   Number of free coefficients: 11
+   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
+
+Status:                                             
+Estimated using ARX on time domain data "flt_idata".
+Fit to estimation data: 75.71% (prediction focus)   
+FPE: 0.005476, MSE: 0.005196 
+\end{lstlisting}
+
 \subsubsection {Descriere model obținut (structură, coeficienți, etc) }
+TO DO
 \subsubsection {Valorile funcțiilor criteriu }
+TO DO
 \subsubsection {Figurile obținute in urma validării ( resid \& compare) (vezi App Laborator 4) }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_6_3_1.eps}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_6_3_2.eps}}
+\end{center}
 \subsection {[3p] Identificare model ARMAX }
+\begin{lstlisting}
+>> sys_armax = armax(flt_idata, [nn(1) nn(2) 3 nn(3)])
+
+sys_armax =
+Discrete-time ARMAX model:  A(z)y(t) = B(z)u(t) + C(z)e(t)
+
+  A(z) = 1 - 1.552 z^-1 + 0.8733 z^-2 - 0.1739 z^-3 - 0.01457 z^-4 - 0.009968 z^-5 + 0.01775 z^-6 + 0.01726 z^-7 - 0.05527 z^-8 + 0.02293 z^-9   
+
+  B(z) = 0.01618 z^-1 + 0.04298 z^-2                                       
+
+  C(z) = 1 - 0.04761 z^-1 - 0.6452 z^-2 + 0.3978 z^-3                                                                           
+
+Sample time: 0.33 seconds
+  
+Parameterization:
+   Polynomial orders:   na=9   nb=2   nc=3   nk=1
+   Number of free coefficients: 14
+   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
+
+Status:                                               
+Estimated using ARMAX on time domain data "flt_idata".
+Fit to estimation data: 77.68% (prediction focus)     
+FPE: 0.004659, MSE: 0.004386  
+\end{lstlisting}
 \subsubsection {Descriere model obținut (structură, coeficienți, etc) }
+TO DO
 \subsubsection {Valorile funcțiilor criteriu }
+TO DO
 \subsubsection {Figurile obținute in urma validării ( resid \& compare) (vezi App Laborator 4) }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_1.eps}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_2.eps}}
+\end{center}
 \subsection {[3p] Identificare model BJ }
+\begin{lstlisting}
+>> sys_bj = bj(flt_idata, [nn(2) 5 6 6 nn(3)])
+
+sys_bj =
+Discrete-time BJ model:  y(t) = [B(z)/F(z)]u(t) + [C(z)/D(z)]e(t)                          
+  B(z) = 0.01746 z^-1 + 0.0368 z^-2
+                                                                                           
+  C(z) = 1 - 0.005233 z^-1 - 0.09159 z^-2 + 0.4298 z^-3 - 0.7975 z^-4 - 0.3137 z^-5                                                                                           
+  D(z) = 1 - 1.492 z^-1 + 1.314 z^-2 - 0.8559 z^-3 - 0.12 z^-4 + 0.1427 z^-5 + 0.04877 z^-6
+
+  F(z) = 1 - 1.75 z^-1 + 1.319 z^-2 - 0.54 z^-3 + 0.001966 z^-4 + 0.188 z^-5 - 0.1157 z^-6 
+                                                                                           
+Sample time: 0.33 seconds
+  
+Parameterization:
+   Polynomial orders:   nb=2   nc=5   nd=6   nf=6   nk=1
+   Number of free coefficients: 19
+   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
+
+Status:                                            
+Estimated using BJ on time domain data "flt_idata".
+Fit to estimation data: 77.99% (prediction focus)  
+FPE: 0.004628, MSE: 0.004266 
+\end{lstlisting}
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
+TO DO
 \subsubsection {Valorile funcțiilor criteriu }
+TO DO
 \subsubsection {Figurile obținute in urma validării ( resid \& compare) (vezi App Laborator 4) }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_8_3_1.eps}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_8_3_2.eps}}
+\end{center}
 \subsection {[3p] Identificare model OE }
+
+\begin{lstlisting}
+>> sys_oe = oe(flt_idata, [nn(2) 9 nn(3)]) 
+
+sys_oe =
+Discrete-time OE model:  y(t) = [B(z)/F(z)]u(t) + e(t)                                                                      
+  B(z) = 0.01363 z^-1 + 0.04363 z^-2
+  F(z) = 1 - 1.622 z^-1 + 1.043 z^-2 - 0.3599 z^-3 + 0.2136 z^-4 - 0.5075 z^-5 + 0.8735 z^-6 - 0.896 z^-7 + 0.4862 z^-8 0.1123 z^-9
+                                                                                          
+Sample time: 0.33 seconds
+  
+Parameterization:
+   Polynomial orders:   nb=2   nf=9   nk=1
+   Number of free coefficients: 11
+   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
+
+Status:                                            
+Estimated using OE on time domain data "flt_idata".
+Fit to estimation data: 53.09%                     
+FPE: 0.02042, MSE: 0.01937
+\end{lstlisting}
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
+TO DO
 \subsubsection {Valorile funcțiilor criteriu }
+TO DO
 \subsubsection {Figurile obținute in urma validării ( resid \& compare) (vezi App Laborator 4) }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_9_3_1.eps}}
+\end{center}
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{3_9_3_2.eps}}
+\end{center}
 \subsection {Alegere Model Final Matlab }
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
+TO DO
 \subsubsection {Valorile funcțiilor criteriu }
+TO DO
 \subsubsection {Figurile obținute în urma validării (resid \& compare) }
+TO DO
 \subsubsection {[1p] Studiul stabilității sistemului: ........... }
+TO DO
 \subsubsection {Modelul Matlab ales încărcat este disponibil ?aici?. }
+TO DO
 \subsubsection {Comentarii/Observații }
+TO DO
 
 \section {MODELARE SI IDENTIFICARE FOLOSIND WIMPIM }
 \subsection {4.1. [1p] Pregătire date inițiale WINPIM. Fisierul txt obtinut (upload) }
