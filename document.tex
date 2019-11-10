@@ -319,25 +319,7 @@ nn = selstruc(V)
 \subsection {Identificare model ARX }
 Am adaugat asta aici 
 \begin{lstlisting}
->> sys_arx = arx(flt_idata, nn)                       
-
-sys_arx =
-Discrete-time ARX model:  A(z)y(t) = B(z)u(t) + e(t)
-
-  A(z) = 1 - 1.545 z^-1 + 1.271 z^-2 - 1.086 z^-3 + 0.9689 z^-4 - 0.8194 z^-5 + 0.669 z^-6 - 0.4828 z^-7 + 0.265 z^-8 - 0.09378 z^-9
-                                                                                         
-  B(z) = 0.01325 z^-1 + 0.04868 z^-2                                                                                                          
-Sample time: 0.33 seconds
-  
-Parameterization:
-   Polynomial orders:   na=9   nb=2   nk=1
-   Number of free coefficients: 11
-   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
-
-Status:                                             
-Estimated using ARX on time domain data "flt_idata".
-Fit to estimation data: 75.71% (prediction focus)   
-FPE: 0.005476, MSE: 0.005196 
+>> sys_arx = arx(flt_idata, nn)
 \end{lstlisting}
 
 \subsubsection {Descriere model obținut (structură, coeficienți, etc) }
@@ -365,27 +347,6 @@ FPE: 0.005476, MSE: 0.005196
 \subsection {[3p] Identificare model ARMAX }
 \begin{lstlisting}
 >> sys_armax = armax(flt_idata, [nn(1) nn(2) 3 nn(3)])
-
-sys_armax =
-Discrete-time ARMAX model:  A(z)y(t) = B(z)u(t) + C(z)e(t)
-
-  A(z) = 1 - 1.552 z^-1 + 0.8733 z^-2 - 0.1739 z^-3 - 0.01457 z^-4 - 0.009968 z^-5 + 0.01775 z^-6 + 0.01726 z^-7 - 0.05527 z^-8 + 0.02293 z^-9   
-
-  B(z) = 0.01618 z^-1 + 0.04298 z^-2                                       
-
-  C(z) = 1 - 0.04761 z^-1 - 0.6452 z^-2 + 0.3978 z^-3
-
-Sample time: 0.33 seconds
-  
-Parameterization:
-   Polynomial orders:   na=9   nb=2   nc=3   nk=1
-   Number of free coefficients: 14
-   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
-
-Status:                                               
-Estimated using ARMAX on time domain data "flt_idata".
-Fit to estimation data: 77.68% (prediction focus)     
-FPE: 0.004659, MSE: 0.004386  
 \end{lstlisting}
 \subsubsection {Descriere model obținut (structură, coeficienți, etc) }
 \[ y[k] = q^-1 \dfrac{B(q^-1)}{A(q^-1)}u[k] + \dfrac{C(q^-1)}{A(q^-1)}e[k] \]
@@ -413,27 +374,6 @@ FPE: 0.004659, MSE: 0.004386
 \subsection {[3p] Identificare model BJ }
 \begin{lstlisting}
 >> sys_bj = bj(flt_idata, [nn(2) 5 6 6 nn(3)])
-
-sys_bj =
-Discrete-time BJ model:  y(t) = [B(z)/F(z)]u(t) + [C(z)/D(z)]e(t)                          
-  B(z) = 0.01746 z^-1 + 0.0368 z^-2
-                                                                                           
-  C(z) = 1 - 0.005233 z^-1 - 0.09159 z^-2 + 0.4298 z^-3 - 0.7975 z^-4 - 0.3137 z^-5                                                                                           
-  D(z) = 1 - 1.492 z^-1 + 1.314 z^-2 - 0.8559 z^-3 - 0.12 z^-4 + 0.1427 z^-5 + 0.04877 z^-6
-
-  F(z) = 1 - 1.75 z^-1 + 1.319 z^-2 - 0.54 z^-3 + 0.001966 z^-4 + 0.188 z^-5 - 0.1157 z^-6 
-                                                                                           
-Sample time: 0.33 seconds
-  
-Parameterization:
-   Polynomial orders:   nb=2   nc=5   nd=6   nf=6   nk=1
-   Number of free coefficients: 19
-   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
-
-Status:                                            
-Estimated using BJ on time domain data "flt_idata".
-Fit to estimation data: 77.99% (prediction focus)  
-FPE: 0.004628, MSE: 0.004266 
 \end{lstlisting}
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
 \[ y[k] = q^-1 \dfrac{B(q^-1)}{F(q^-1)}u[k] + \dfrac{C(q^-1)}{D(q^-1)}e[k] \]
@@ -463,23 +403,6 @@ FPE: 0.004628, MSE: 0.004266
 
 \begin{lstlisting}
 >> sys_oe = oe(flt_idata, [nn(2) 9 nn(3)]) 
-
-sys_oe =
-Discrete-time OE model:  y(t) = [B(z)/F(z)]u(t) + e(t)                                                                      
-  B(z) = 0.01363 z^-1 + 0.04363 z^-2
-  F(z) = 1 - 1.622 z^-1 + 1.043 z^-2 - 0.3599 z^-3 + 0.2136 z^-4 - 0.5075 z^-5 + 0.8735 z^-6 - 0.896 z^-7 + 0.4862 z^-8 0.1123 z^-9
-                                                                                          
-Sample time: 0.33 seconds
-  
-Parameterization:
-   Polynomial orders:   nb=2   nf=9   nk=1
-   Number of free coefficients: 11
-   Use "polydata", "getpvec", "getcov" for parameters and their uncertainties.
-
-Status:                                            
-Estimated using OE on time domain data "flt_idata".
-Fit to estimation data: 53.09%                     
-FPE: 0.02042, MSE: 0.01937
 \end{lstlisting}
 \subsubsection {Descriere model ales (structură, coeficienți, etc) }
 \[ y[k] = q^-1 \dfrac{B(q^-1)}{F(q^-1)}u[k] + e[k] \]
@@ -534,7 +457,7 @@ FPE: 0.004659, MSE: 0.004386
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_2.eps}}
 \end{center}
-\subsubsection {[1p] Studiul stabilității sistemului: ........... }
+\subsubsection {[1p] Studiul stabilității sistemului: }
 Systemul este stabil:
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_10_4_1.eps}}
