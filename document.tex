@@ -635,12 +635,19 @@ na=3   nb=1   nc=3   nk=1
   \fbox{ \includegraphics[width=0.8\textwidth]{winpim/sim_armax.png}}
 \end{center}
 \subsection {Modelul final ales pentru continuarea proiectului este: }
-Alegem modelul din WinPIM deoarece are graele polinoamelor mai mici.
+Alegem modelul din WinPIM deoarece are gradele polinoamelor mai mici.
+\begin{lstlisting}
+A = [1 -1.36248 0.61965 -0.09122]
+B = [0.06305]
+C = [1 -0.28752 -0.05547 0.00307]
+na=3   nb=1   nc=3   nk=1
+\end{lstlisting}
 
 \section {CALCUL REGULATOR RST-1, SIMULARE SI VALIDARE }
 \subsection {Platforma laborator 6 - citită }
 Am citit
 \subsection {Obiective de reglare impuse}
+\begin{lstlisting}
 Tt = 3.2
 Te = 0.33
 w_min = 0.7616
@@ -652,16 +659,81 @@ w = 4 / (zeta * Tt)
 Q = w*w / (s^2 + s*2*w*zeta + w^2)
 Qd = c2d(Q, Te, 'zoh')
 [P Z] = pzmap(Qd)
+\end{lstlisting}
+
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|}
+      \hline
+      $t_t$ & $\sigma$ \\
+      \hline
+      3.2 [s] & 0 \% \\
+      \hline
+    \end{tabular}
+    \caption{Obiective de reglare alese.}
+\end{table}
 
 \subsection {5.3. Pulsatia naturala si atenuarea echivalente cu obiectivele de reglare impuse: }
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|}
+      \hline
+      $\omega_n$ & $\zeta$ \\
+      \hline
+      1.2755 & 0.98? \\
+      \hline
+    \end{tabular}
+    \caption{Pulsatia naturala si factorul de amoritzare.}
+\end{table}
+
 \subsection {5.4.[2p] Polii dominanti discreti impusi ca urmare a obiectivelor de reglare: }
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|}
+      \hline
+      $z_1$ & $z_2$ \\
+      \hline
+      $0.6597 + 0.0554i$ & $0.6597 - 0.0554i$ \\
+      \hline
+    \end{tabular}
+    \caption{Polii impusi.}
+\end{table}
+
 \subsection {5.5. [2p] Specificare polinom P: }
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|}
+      \hline
+      Grad P & 2 \\
+      \hline
+      $P(q^{-1})$ & $1 + 3.0100*z^{-1} + 2.2821*z^{-2}$ \\
+      \hline
+    \end{tabular}
+    \caption{Polinom}
+\end{table}
+
 \subsection {5.6. [2p] Grade polinoame ecuatia Sylvester }
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|l|l|l|l|}
+      \hline
+      $n_A$ & $n_B$ & $n_P$ & $n_R$ & $n_S$ & $d$ \\
+      \hline
+      3 & 1 & 2 & 2 & 1 & 1 \\
+      \hline
+    \end{tabular}
+    \caption{Grade}
+\end{table}
+
 \subsection {5.7. [2p]  Matricea M asociata : }
 \subsection {5.8. [1p] Solutia ecuatiei}
-\subsection {5.9. [3p] Pentru ca sistemul sa ofere timp de raspuns minim si suprareglaj < 5\% se aleg: }
+$x' = [1.0000 + 0.0000i   2.3625 + 0.0000i  51.6868 + 0.8784i -21.7715 + 0.0000i   0.0000 + 0.0000i]$
+\subsection {5.9. [3p] Pentru ca sistemul sa ofere timp de raspuns minim si suprareglaj < 5\% se aleg:
+$s = [2.3625]$
+$r = [51.6868 - 0.8784i -21.7715 + 0.0000i   0.0000 + 0.0000i]$
 \subsection {5.10. [4p]  Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
 \subsection {5.11. [1p] Observatii legate de rezultatele obtinute: }
+
 \subsection {5.12. [1p] Specificare polinom P: }
 \subsection {5.13 [1p] Grade polinoame ecuatia Sylvester }
 \subsection {5.14. [2p]  Matricea M asociata : }
