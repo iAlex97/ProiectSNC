@@ -33,7 +33,7 @@
 
 \title{Proiect SNC}
 \date{2019\\ Octombrie}
-\author{Pangratie Andrei - 342 B3}
+\author{Pangratie Andrei - 342 B3\\Ionescu Alexandru Cristian - 342 B3}
 
 \begin{document}
 
@@ -638,9 +638,21 @@ na=3   nb=1   nc=3   nk=1
 Alegem modelul din WinPIM deoarece are graele polinoamelor mai mici.
 
 \section {CALCUL REGULATOR RST-1, SIMULARE SI VALIDARE }
-a
-\subsection {5.1. Platforma laborator 6 - citită }
-\subsection {5.2.  Obiective de reglare impuse  : }
+\subsection {Platforma laborator 6 - citită }
+Am citit
+\subsection {Obiective de reglare impuse}
+Tt = 3.2
+Te = 0.33
+w_min = 0.7616
+w_max = 4.7600
+zeta = 0.98
+
+s = tf('s')
+w = 4 / (zeta * Tt)
+Q = w*w / (s^2 + s*2*w*zeta + w^2)
+Qd = c2d(Q, Te, 'zoh')
+[P Z] = pzmap(Qd)
+
 \subsection {5.3. Pulsatia naturala si atenuarea echivalente cu obiectivele de reglare impuse: }
 \subsection {5.4.[2p] Polii dominanti discreti impusi ca urmare a obiectivelor de reglare: }
 \subsection {5.5. [2p] Specificare polinom P: }
