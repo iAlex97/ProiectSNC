@@ -1,0 +1,27 @@
+F    Unknown   $$REGULATEUR
+Delay :
+ 1
+B*..deg:0
+0.070400 
+A...deg:3
+ 1.  -1.094200 0.280000 0.070400 
+Bm..deg:1
+0.067574 0.051315 
+Am..deg:2
+ 1.  -1.319349 0.438238 
+R...deg:3
+9.754701 -12.147731 3.306943 0.774851 
+S...deg:2
+1.000000 -0.225149 -0.774851 
+T...deg:2
+14.204545 -18.740753 6.224972 
+Sampling Period (Ts): 
+ 0.33
+P...deg: Unknown
+ 1.  
+C...deg: Unknown
+ 1.  
+HR..deg: Unknown
+ 1.  
+HS..deg: Unknown
+ 1.  
