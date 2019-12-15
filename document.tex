@@ -706,7 +706,7 @@ Qd = c2d(Q, Te, 'zoh')
       \hline
       Grad P & 2 \\
       \hline
-      $P(q^{-1})$ & $1 + 3.0100*q^{-1} + 2.2821*q^{-2}$ \\
+      $P(q^{-1})$ & $1 - 1.3193*q^{-1} + 0.4382*q^{-2}$ \\
       \hline
     \end{tabular}
     \caption{Polinom}
@@ -719,7 +719,7 @@ Qd = c2d(Q, Te, 'zoh')
       \hline
       $n_A$ & $n_B$ & $n_P$ & $n_R$ & $n_S$ & $d$ \\
       \hline
-      3 & 1 & 2 & 2 & 1 & 1 \\
+      2 & 1 & 2 & 1 & 1 & 1 \\
       \hline
     \end{tabular}
     \caption{Grade}
@@ -729,27 +729,26 @@ Qd = c2d(Q, Te, 'zoh')
 \begin{center}
   \begin{equation*}
   M=\begin{bmatrix}
-  1 & 0 & 0 & 0 & 0\\
-  a_{1} & 1 & 0 & 0 & 0\\
-  a_{2} & a_{1} & b_{1} & 0 & 0\\
-  a_{3} & a_{2} & 0 & b_{1} & 0\\
-  0 & 0 & 0 & 0 & b_{1}
+  1 & 0 & 0 & 0\\
+  a_{1} & 1 & 0 & 0\\
+  a_{2} & a_{1} & b_{1} & 0\\
+  0 & a_{2} & 0 & b_{1}
   \end{bmatrix} =\begin{bmatrix}
-  1 & 0 & 0 & 0 & 0\\
-  -1.3625\  & 1 & 0 & 0 & 0\\
-  0.6197 & -1.3625 & 0.0630 & 0 & 0\\
-  -0.0912 & 0.6197 & 0 & 0.0630 & 0\\
-  0 & 0 & 0 & 0 & 0.0630
+  1 & 0 & 0 & 0\\
+  -1.0942 & 1 & 0 & 0\\
+  0.2800 & -1.0942 & 0.0704 & 0\\
+  0 & 0.2800 & 0 & 0.0704
   \end{bmatrix}
   \end{equation*}
 \end{center}
+
 
 \subsection {Solutia ecuatiei}
 Folosind notatiile:
 \begin{center}
   \begin{gather*}
-  x^{T} =[ 1\ s_{1} \ \vdots \ r_{0} \ r_{1} \ r_{2}]\\
-  p^{T} =[ 1\ p_{1} \ p_{2} \ \vdots \ 0 \ 0]
+  x^{T} =[ 1\ s_{1} \ \vdots \ r_{0} \ r_{1}]\\
+  p^{T} =[ 1\ p_{1} \ p_{2} \ \vdots \ 0 ]
   \end{gather*}
 \end{center}
 
@@ -757,19 +756,54 @@ Inlocuim si rezolvam sistemul:
 \begin{center}
   \begin{equation*}
   x=M^{-1} p=\begin{bmatrix}
-  1\\
-  2.3625\\
-  51.6868\ +\ 0.8784i\\
-  -21.7715\ \\
-  0
+  1.0000\\
+  -0.2251\\
+  -1.2517\\
+  0.8955
   \end{bmatrix}
   \end{equation*}
 \end{center}
 
-\subsection {Pentru ca sistemul sa ofere timp de raspuns minim si suprareglaj < 5\% se aleg:}
-$s = [2.3625]$
-$r = [51.6868 - 0.8784i\ \ -21.7715 + 0.0000i\ \ 0.0000 + 0.0000i]$
+Asadar, rezulta polinoamele R si S:
+\begin{center}
+  \begin{equation*}
+  \begin{cases}
+  R\left( q^{-1}\right) =-1.2517+0.8955q^{-1}\\
+  S\left( q^{-1}\right) =1-0.2251q^{-1}
+  \end{cases}
+  \end{equation*}
+\end{center}
+
+\subsection {Pentru ca sistemul sa ofere timp de raspuns minim si suprareglaj $< 5\%$ se aleg:}
+
+Se alege generatorul de traiectorii $B_m/A_m$ astfel incat sa indeplineasca conditiile din cerinta:
+
+\begin{center}
+  \begin{equation*}
+  \frac{B_{m}\left( q^{-1}\right)}{A_{m}\left( q^{-1}\right)} =\frac{1.0000+0.75941^{-1}}{1.0000-1.3193q^{-1} +0.4382q^{-2}}
+  \end{equation*}
+\end{center}
+
+Si polinomul T:
+
+\begin{center}
+  \begin{equation*}
+  T\left( q^{-1}\right) =0.9604-1.2671q^{-1} +0.4209q^{-2}
+  \end{equation*}
+\end{center}
+
 \subsection {Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
+
+Am realizat urmatoarea schema Simulink:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{matlab/5_10_1.png}}
+\end{center}
+
+Simularea sistemului:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{matlab/5_10_2.png}}
+\end{center}
+
 \subsection {Observatii legate de rezultatele obtinute: }
 
 \subsection {Specificare polinom P: }
@@ -777,6 +811,10 @@ $r = [51.6868 - 0.8784i\ \ -21.7715 + 0.0000i\ \ 0.0000 + 0.0000i]$
 \subsection {Matricea M asociata : }
 \subsection {Solutia ecuatiei}
 \subsection {Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{matlab/5_16_1.png}}
+\end{center}
+
 \subsection {Observatii legate de rezultatele obtinute: }
 
 \section {PROIECTARE REGULATOR RST-1 - WINREG }
@@ -809,13 +847,13 @@ Am introdus aceste valori in WinReg, dupa cum urmeaza:
   \centering
     \begin{tabular}{|l|l|}
       \hline
-       $R(q^{-1})$ & $0.007993q^{-2}-0.897038q^{-1}+0.993165$\\
+       $R(q^{-1})$ & $0.007993-0.897038q^{-1}+0.993165q^{-2}$\\
       \hline
-       $S(q^{-1})$ & $q^{-2}-0.75029q^{-1}-0.24971$\\
+       $S(q^{-1})$ & $1-0.75029q^{-1}-0.24971q^{-2}$\\
       \hline
-       $T(q^{-1})$ & $14.204545q^{-2}-26.200142q^{-1}+12.099716$\\
+       $T(q^{-1})$ & $14.204545-26.200142q^{-1}+12.099716q^{-2}$\\
       \hline
-       $B_m(q^{-1})/A_m(q^{-1})$ & $(0.03048q^{-1} + 0.02556)/(q^{-2}-1.533754q^{-1}+0.589793)$ \\
+       $B_m(q^{-1})/A_m(q^{-1})$ & $(0.03048 + 0.02556q^{-1})/(-1.533754q^{-1}+0.589793q^{-2})$ \\
       \hline
     \end{tabular}
     \caption{Polinoame regulator}
