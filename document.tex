@@ -87,7 +87,7 @@
 	  \fbox{ \includegraphics[width=1\textwidth]{1_3_1.eps}}
 	\end{center}
 
-\subsubsection {[1p] Comentarii referitor grafice obtinute }
+\subsubsection {Comentarii referitor grafice obtinute }
 \subsection {Datele masurate salvate }
 \subsection {Caracteristici proces }
 \begin{table}[H]
@@ -162,7 +162,7 @@ Fft spab generat manual:
   idinput(510, 'PRBS', [0 1/2], [6 8])
 \end{lstlisting}
 
-\subsection {[2p] Caracteristici semnal SPAB de intrare }
+\subsection {Caracteristici semnal SPAB de intrare }
 \begin{table}[H]
   \centering
   \begin{tabular}{|l|l|l|l|}
@@ -175,29 +175,29 @@ Fft spab generat manual:
   \caption{Caracteristici semnal SPAB}
 \end{table}
 
-\subsection {[3p] Afisare spectrul semnal SPAB de intrare }
+\subsection {Afisare spectrul semnal SPAB de intrare }
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{2_3_1.eps}}
 \end{center}
 
-\subsection { [1p] Observatii asupra semnalului SPAB generat }
-\subsection { Realizare experiment identificare (conform instructiunilor din laborator) }
+\subsection {Observatii asupra semnalului SPAB generat }
+\subsection {Realizare experiment identificare (conform instructiunilor din laborator) }
 Am realizat experimentul de identificare.
-\subsection { Fisier rezultate identificare }
+\subsection {Fisier rezultate identificare }
 Numele fisierului este 'B70\_DateExper.mat'. Fiserul este de tip .mat in care este salvat o structura tip iddata care contine intrarea, iesirea si configurarea unor parametri (exp Te).
-\subsection { [3p] Afisare spectrul semnal SPAB de iesire (achizitionat) }
+\subsection {Afisare spectrul semnal SPAB de iesire (achizitionat) }
 
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{2_7_1.eps}}
 \end{center}
 
-\subsection {[1p] Observatii asupra semnalului achizitonat }
+\subsection {Observatii asupra semnalului achizitonat }
 Se observa favorizarea unor alte frecvente (in afara de 0Hz)
 
 % Section 3
 \section {IDENTIFICARE SI VALIDARE MODEL MATLAB }
 \subsection {Platforma laborator 4 - citită}
-\subsection {[2p+1p+2p] Rezolvare Aplicatii Lab 4 }
+\subsection {Rezolvare Aplicatii Lab 4 }
 \subsubsection {Cum se determina daca un model este liniar sau neliniar?}
 Se determina prin stimularea procesului cu diferite intrari de tip treapta pozitiva sau negativa de diferite amplitudini. Daca amplificarea statica a procesului $k_p = \dfrac{y_{stationar}}{u_{stationar}}$ are valori diferite, sau daca timpii de crestere sunt diferiti, atunci este vorba de un model neliniar
 
@@ -218,11 +218,11 @@ In ce masura ar putea fii un model real aproximat de modele de diferite tipuri p
   flt_data = filter(b, a, data_d.OutputData)
   plotFreq(flt_data, 0.33)
 \end{lstlisting}
-\subsubsection {[2p] Spectru semnale filtrate: }
+\subsubsection {Spectru semnale filtrate: }
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_3_2.eps}}
 \end{center}
-\subsubsection {[1p] Comentarii asupra spectrului }
+\subsubsection {Comentarii asupra spectrului }
 Spectrul ajunge sa piarda frecventele afectate de filtru, insemnand ca o parte din zgomote sunt filtrate si cel mai observabil acesta pierde spike-ul in urma modificarii ofsetului.
 \subsection {Seturile de date de identificare Matlab - iddata pentru identificare si validare. }
 \begin{lstlisting}
@@ -239,7 +239,7 @@ save("70BY_IdentData", "eData");
 \begin{lstlisting}
 save("70BY_ValidationData", "vData");
 \end{lstlisting}
-\subsection {[2p] Estimarea complexității model ARX }
+\subsection {Estimarea complexității model ARX }
 \begin{lstlisting}
 flt_idata = iddata(flt_data, data_d.InputData, 0.33)
 e_idata = iddata(eData, data_d.InputData(1:508), 0.33)
@@ -351,7 +351,7 @@ FPE: 0.005476, MSE: 0.005196
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_6_3_3.eps}}
 \end{center}
-\subsection {[3p] Identificare model ARMAX }
+\subsection {Identificare model ARMAX }
 \begin{lstlisting}
 >> sys_armax = armax(flt_idata, [nn(1) nn(2) 3 nn(3)])
 \end{lstlisting}
@@ -378,7 +378,7 @@ FPE: 0.004659, MSE: 0.004386
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_3.eps}}
 \end{center}
-\subsection {[3p] Identificare model BJ }
+\subsection {Identificare model BJ }
 \begin{lstlisting}
 >> sys_bj = bj(flt_idata, [nn(2) 5 6 6 nn(3)])
 \end{lstlisting}
@@ -406,7 +406,7 @@ FPE: 0.004628, MSE: 0.004266
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_8_3_3.eps}}
 \end{center}
-\subsection {[3p] Identificare model OE }
+\subsection {Identificare model OE }
 
 \begin{lstlisting}
 >> sys_oe = oe(flt_idata, [nn(2) 9 nn(3)]) 
@@ -465,7 +465,7 @@ FPE: 0.004659, MSE: 0.004386
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_7_3_2.eps}}
 \end{center}
-\subsubsection {[1p] Studiul stabilității sistemului: }
+\subsubsection {Studiul stabilității sistemului: }
 Systemul este stabil:
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{3_10_4_1.eps}}
@@ -477,15 +477,15 @@ In afara de OE toate celelalte modele se apropie comparabil de mult cu procesul 
 TO DO - more?
 
 \section {MODELARE SI IDENTIFICARE FOLOSIND WIMPIM }
-\subsection {[1p] Pregătire date inițiale WINPIM. Fisierul txt obtinut (upload) }
+\subsection {Pregătire date inițiale WINPIM. Fisierul txt obtinut (upload) }
 Fisierul txt poate fi gasit la urmatorul path: $./modele\_winpim/B70\_date\_win.txt$
 
-\subsection {[1p] Incarcare fisier in WinPIM si specificare perioada de esantionare }
+\subsection {Incarcare fisier in WinPIM si specificare perioada de esantionare }
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_incarcare_1.png}}
 \end{center}
 
-\subsection {[1p] Aplicare filtrare set de date (eliminarea componentei continue) }
+\subsection {Aplicare filtrare set de date (eliminarea componentei continue) }
 Am aplicat filtru pentru eliminarea componentei continue:
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{winpim/b70_dc.png}}
@@ -502,7 +502,7 @@ In continuare, am aplicat si un filtru Butterworth:
 
 Semnalul rezultat a fost salvat la urmatorul path: $./modele\_winpim/B70\_butterworth.dat$
 
-\subsection {[1p] Estimarea complexitatii}
+\subsection {Estimarea complexitatii}
 
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{winpim/winpim_estimare_1.png}}
@@ -524,7 +524,7 @@ Semnalul rezultat a fost salvat la urmatorul path: $./modele\_winpim/B70\_butter
   \caption{Caracteristici proces alese experimental.}
 \end{table}
 
-\subsection {[5p] Identificare si validare modele }
+\subsection {Identificare si validare modele }
 \subsubsection {Identificare si validare modele ARX}
 Am variat parametrii pana am obtinut un model ce trecea ambele teste:
 \begin{center}
@@ -725,7 +725,7 @@ Qd = c2d(Q, Te, 'zoh')
     \caption{Grade}
 \end{table}
 
-\subsection {[2p]  Matricea M asociata : }
+\subsection {Matricea M asociata : }
 \begin{center}
   \begin{equation*}
   M=\begin{bmatrix}
@@ -773,7 +773,7 @@ Asadar, rezulta polinoamele R si S:
   \end{equation*}
 \end{center}
 
-\subsection {Pentru ca sistemul sa ofere timp de raspuns minim si suprareglaj $< 5\%$ se aleg:}
+\subsection {Pentru ca sistemul sa ofere timp de raspuns minim si suprareglaj max. 5\% se aleg:}
 
 Se alege generatorul de traiectorii $B_m/A_m$ astfel incat sa indeplineasca conditiile din cerinta:
 
@@ -804,6 +804,11 @@ Simularea sistemului:
 \end{center}
 
 \subsection {Observatii legate de rezultatele obtinute: }
+\begin{itemize}
+  \item Urmareste referinta, dar are eroare stationara nenula
+  \item Indeplineste performantele supuse regimului tranzitoriu
+  \item Nu rejecteaza perturbatiile de tip treapta aparute
+\end{itemize}
 
 \subsection {Specificare polinom P: }
 \begin{table}[H]
@@ -885,14 +890,27 @@ Inlocuim si rezolvam sistemul:
   \end{equation*}
 \end{center}
 
-$s = [1\ -0.2251\ -0.7749]$;
-$r = [9.7548\ -11.1478\ 3.0818]$
+Rezulta, similar, polinoamele R si S:
+\begin{center}
+  \begin{equation*}
+  \begin{cases}
+  R\left( q^{-1}\right) =9.7548-11.1478q^{-1}+3.0818q^{-2}\\
+  S\left( q^{-1}\right) =1-0.2251q^{-1}-0.7749q^{-2}
+  \end{cases}
+  \end{equation*}
+\end{center}
+
 \subsection {Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{matlab/5_16_1.png}}
 \end{center}
 
 \subsection {Observatii legate de rezultatele obtinute: }
+\begin{itemize}
+  \item Urmareste referinta si are eroare stationara nula
+  \item Indeplineste performantele supuse regimului tranzitoriu
+  \item Rejecteaza perturbatiile de tip treapta aparute
+\end{itemize}
 
 \section {PROIECTARE REGULATOR RST-1 - WINREG }
 \subsection {Specificare performante in urmarire respectiv in reglare: }
@@ -979,7 +997,7 @@ Simulare cu perturbatia anterioara si perturbatii stocastice:
   \fbox{ \includegraphics[width=0.8\textwidth]{7_1_2_1.eps}}
 \end{center}
 
-\subsubsection {[2p] Alegand o alta referinta raspunsul sistemului este capturat in figura de mai jos: }
+\subsubsection {Alegand o alta referinta raspunsul sistemului este capturat in figura de mai jos: }
 \begin{center}
   \fbox{ \includegraphics[width=0.8\textwidth]{7_1_2_2.eps}}
 \end{center}
@@ -997,7 +1015,7 @@ Simulare cu perturbatia anterioara si perturbatii stocastice:
     \caption{Performante obtinute}
 \end{table}
 
-\subsection {7.3. Comentarii privind calitatea solutiei obtinute vs specificatiile impuse: }
+\subsection {Comentarii privind calitatea solutiei obtinute vs specificatiile impuse: }
 \begin{itemize}
   \item Performantele impuse de suprareglaj si timp tranzitoriu nu au putut fi indeplinite simultan cu un regulator ce produce o iesire stabila
   \item Eroarea stationara este 0, sistemul obtinut rejectand perturbatiile
@@ -1005,23 +1023,38 @@ Simulare cu perturbatia anterioara si perturbatii stocastice:
 
 \section {CALCUL REGULATOR RST-2, SIMULARE SI VALIDARE }
 \subsection {Platforma laborator 8 - citită }
-\subsection {[2p] Regulatorul RST 1 si-a indeplinit sau nu performantele impuse ?  Daca nu, ce masuri se iau (ce specificatii noi se impun fata de primul design ) ? }
-\subsection {[4p] Regulatorul RST 1 indeplineste marginile standard de robustete (se pot verifica cu aplicatia WinPIM)?   Figura cu functia de sensibilitate si template este furnizata aici. }
-\subsection {[4p] In cazul in care regulatorul a trebuit recalculat acesta este descris de polinoamele: }
-\subsection {[2p] Rezultatele in simulare sunt furnizate in figura urmatoare: }
-\subsection {[2p] Functia de sensibilitate a noii solutii: }
+\subsection {Regulatorul RST 1 si-a indeplinit sau nu performantele impuse ? Daca nu, ce masuri se iau (ce specificatii noi se impun fata de primul design ) ? }
+Regulatorul RST 1 nu si-a indeplinit performantele impuse asupra timpului tranzitoriu si a suprareglajului cand a fost testat pe instalatie. Eroarea stationara este aproximativa cu zero, iar perturbatiile stochastice sunt rejectate.
+
+\subsection {Regulatorul RST 1 indeplineste marginile standard de robustete (se pot verifica cu aplicatia WinPIM)? Figura cu functia de sensibilitate si template este furnizata aici. }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{8_3_1.png}}
+\end{center}
+
+Se observa ca sistemul are marginea de amplitudine si de faza destul de bune pentru a asigura robustetea sistemului in bucla inchisa.
+
+\subsection {In cazul in care regulatorul a trebuit recalculat acesta este descris de polinoamele: }
+\subsection {Rezultatele in simulare sunt furnizate in figura urmatoare: }
+\subsection {Functia de sensibilitate a noii solutii: }
 
 \section {Evaluare Experimentala Regulator RST-2 }
-\subsection {[3p] Evaluare performante pe sistemul real. }
+a
+\subsection {Evaluare performante pe sistemul real. }
 \subsubsection {Se alege referinta r(t) = a.i. u(t) stationar sa fie egal cu u0. Pentru aceasta referinta s-a stimulat sistemul si s-a aplicat si o perturbatie cand a ajuns in regimul stationar de cca.\% }
 \subsubsection {Rezultatul simularii se afla in imaginea de mai jos: }
-\subsubsection {[2p] Alegand o alta referinta raspunsul sistemului este capturat in figura de mai jos: }
-\subsection {[2p] Performantele se regasesc rezumate in tabelul urmator }
-\subsection {[1p] Comentarii privind calitatea solutiei obtinute vs specificatiile impuse: }
+\subsubsection {Alegand o alta referinta raspunsul sistemului este capturat in figura de mai jos: }
+\subsection {Performantele se regasesc rezumate in tabelul urmator }
+\subsection {Comentarii privind calitatea solutiei obtinute vs specificatiile impuse: }
 
 \section {CONCLUZII GENERALE SI FEEDBACK PROIECT }
-a
 \subsection {Concluzii legate de solutia de reglare calculata }
+\begin{itemize}
+  \item Sistemul aproximat nu se comporta intocmai ca cel real, obtinand rezultate diferite fata de simularile din WinReg/Matlab
+\end{itemize}
+
 \subsection {Feedback legat de desfasurare/ continut proiect }
+\begin{itemize}
+  \item Aplicatia web OneNote este greu de folosit pentru utilizatorii care nu au acces la un client nativ, in special pe linux/mac.
+\end{itemize}
 
 \end{document}
