@@ -615,7 +615,7 @@ Din experimentele de identificare si validare am ajuns la concluzia ca modelele 
 Fisierul poate fi gasit la: $./modele\_winpim/arimax.mod$
 
 Model ARIMAX:
-\[ y[k] = q^-1 \dfrac{B(q^-1)}{A(q^-1)}u[k] + \dfrac{C(q^-1)}{A(q^-1)}e[k] \]
+\[ y[k] = q^{-1} \dfrac{B(q^-1)}{A(q^-1)}u[k] + \dfrac{C(q^-1)}{A(q^-1)}e[k] \]
 
 \begin{lstlisting}
 A = [1 -1.36248 0.61965 -0.09122]
@@ -673,7 +673,7 @@ Qd = c2d(Q, Te, 'zoh')
     \caption{Obiective de reglare alese.}
 \end{table}
 
-\subsection {5.3. Pulsatia naturala si atenuarea echivalente cu obiectivele de reglare impuse: }
+\subsection {Pulsatia naturala si atenuarea echivalente cu obiectivele de reglare impuse: }
 \begin{table}[H]
   \centering
     \begin{tabular}{|l|l|}
@@ -686,7 +686,7 @@ Qd = c2d(Q, Te, 'zoh')
     \caption{Pulsatia naturala si factorul de amoritzare.}
 \end{table}
 
-\subsection {5.4.[2p] Polii dominanti discreti impusi ca urmare a obiectivelor de reglare: }
+\subsection {Polii dominanti discreti impusi ca urmare a obiectivelor de reglare: }
 \begin{table}[H]
   \centering
     \begin{tabular}{|l|l|}
@@ -699,20 +699,20 @@ Qd = c2d(Q, Te, 'zoh')
     \caption{Polii impusi.}
 \end{table}
 
-\subsection {5.5. [2p] Specificare polinom P: }
+\subsection {Specificare polinom P: }
 \begin{table}[H]
   \centering
     \begin{tabular}{|l|l|}
       \hline
       Grad P & 2 \\
       \hline
-      $P(q^{-1})$ & $1 + 3.0100*z^{-1} + 2.2821*z^{-2}$ \\
+      $P(q^{-1})$ & $1 - 1.3193*q^{-1} + 0.4382*q^{-2}$ \\
       \hline
     \end{tabular}
     \caption{Polinom}
 \end{table}
 
-\subsection {5.6. [2p] Grade polinoame ecuatia Sylvester }
+\subsection {Grade polinoame ecuatia Sylvester }
 \begin{table}[H]
   \centering
     \begin{tabular}{|l|l|l|l|l|l|}
@@ -725,21 +725,138 @@ Qd = c2d(Q, Te, 'zoh')
     \caption{Grade}
 \end{table}
 
-\subsection {5.7. [2p]  Matricea M asociata : }
-\subsection {5.8. [1p] Solutia ecuatiei}
-$x' = [1.0000 + 0.0000i   2.3625 + 0.0000i  51.6868 + 0.8784i -21.7715 + 0.0000i   0.0000 + 0.0000i]$
-\subsection {5.9. [3p] Pentru ca sistemul sa ofere timp de raspuns minim si suprareglaj < 5\% se aleg: }
+\subsection {[2p]  Matricea M asociata : }
+\begin{center}
+  \begin{equation*}
+  M=\begin{bmatrix}
+  1 	& 0 	& 0 	& 0 	& 0\\
+  a_{1} & 1 	& 0 	& 0 	& 0\\
+  a_{2} & a_{1} & b_{1} & 0 	& 0\\
+  a_{3} & a_{2} & 0 	& b_{1} & 0\\
+  0 	& 0 	& 0 	& 0 	& b_{1}
+  \end{bmatrix} =\begin{bmatrix}
+  1 		& 0 		& 0 		& 0 		& 0\\
+  -1.3625\  & 1 		& 0 		& 0 		& 0\\
+  0.6197 	& -1.3625 	& 0.0630 	& 0 		& 0\\
+  -0.0912 	& 0.6197 	& 0 		& 0.0630 	& 0\\
+  0 		& 0 		& 0 		& 0 		& 0.0630
+  \end{bmatrix}
+  \end{equation*}
+\end{center}
+
+\subsection {[1p] Solutia ecuatiei}
+
+Folosind notatiile:
+\begin{center}
+  \begin{gather*}
+  x^{T} =[ 1\ s_{1} \ \vdots \ r_{0} \ r_{1} \ r_{2}]\\
+  p^{T} =[ 1\ p_{1} \ p_{2} \ \vdots \ 0 \ 0]
+  \end{gather*}
+\end{center}
+
+Inlocuim si rezolvam sistemul:
+\begin{center}
+  \begin{equation*}
+  x=M^{-1} p=\begin{bmatrix}
+  1\\
+  2.3625\\
+  51.6868\ +\ 0.8784i\\
+  -21.7715\ \\
+  0
+  \end{bmatrix}
+  \end{equation*}
+\end{center}
+
+\subsection {[3p ]Pentru ca sistemul sa ofere timp de raspuns minim si suprareglaj < 5\% se aleg:}
 $s = [2.3625]$
 $r = [51.6868 - 0.8784i -21.7715 + 0.0000i   0.0000 + 0.0000i]$
-\subsection {5.10. [4p]  Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
-\subsection {5.11. [1p] Observatii legate de rezultatele obtinute: }
+\subsection {Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
+\subsection {Observatii legate de rezultatele obtinute: }
 
-\subsection {5.12. [1p] Specificare polinom P: }
-\subsection {5.13 [1p] Grade polinoame ecuatia Sylvester }
-\subsection {5.14. [2p]  Matricea M asociata : }
-\subsection {5.15. [1p] Solutia ecuatiei}
-\subsection {5.16. [2p]  Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
-\subsection {5.17. [1p] Observatii legate de rezultatele obtinute: }
+\subsection {Specificare polinom P: }
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|}
+      \hline
+      Grad P & 2 \\
+      \hline
+      $P(q^{-1})$ & $1 - 1.3193*q^{-1} + 0.4382*q^{-2}$ \\
+      \hline
+      
+    \end{tabular}
+    \caption{Polinom}
+\end{table}
+
+
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|}
+      \hline
+      Grad P' & 3 \\
+      \hline
+      $P'(q^{-1})$ & $1 - 2.0942*q^{-1} + 1.3742*q^{-2} - 0.2800*q^{-3}$ \\
+      \hline  
+    \end{tabular}
+    \caption{Polinom}
+\end{table}
+
+
+\subsection {Grade polinoame ecuatia Sylvester }
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|l|l|l|l|}
+      \hline
+      $n_A$ & $n_B$ & $n_P$ & $n_R$ & $n_S$ & $d$ \\
+      \hline
+      3 	& 1 	& 2 	& 2 	& 2 	& 1 \\
+      \hline
+    \end{tabular}
+    \caption{Grade}
+\end{table}
+\subsection {Matricea M asociata : }
+\begin{center}
+  \begin{equation*}
+  M=\begin{bmatrix}
+  1 		& 0 		& 0 		& 0 		& 0\\
+  a_{1} 	& 1 		& 0 		& 0 		& 0\\
+  a_{2} 	& a_{1} 	& b_{1} 	& 0 		& 0\\
+  a_{3} 	& a_{2} 	& 0 		& b_{1} 	& 0\\
+  0 		& a_{3} 	& 0 		& 0 		& b_{1}
+  \end{bmatrix} =\begin{bmatrix}
+  1 		& 0 		& 0 		& 0 		& 0\\
+  -2.094  	& 1 		& 0 		& 0 		& 0\\
+  1.374 	& -2.094 	& 0.0704 	& 0 		& 0\\
+  -0.28 	& 1.374 	& 0 		& 0.0704 	& 0\\
+  0 		& -0.28 	& 0 		& 0 		& 0.0704
+  \end{bmatrix}
+  \end{equation*}
+\end{center}
+\subsection {Solutia ecuatiei}
+Folosind notatiile:
+\begin{center}
+  \begin{gather*}
+  x^{T} =[ 1\ s_{1} \ \vdots \ r_{0} \ r_{1} \ r_{2}]\\
+  p^{T} =[ 1\ p_{1} \ p_{2} \ \vdots \ 0 \ 0]
+  \end{gather*}
+\end{center}
+
+Inlocuim si rezolvam sistemul:
+\begin{center}
+  \begin{equation*}
+  x=M^{-1} p=\begin{bmatrix}
+  1\\
+  0.7749\\
+  9.7548\\
+  -11.1478\\
+  3.0818
+  \end{bmatrix}
+  \end{equation*}
+\end{center}
+
+$s = [1\ -0.2251\ -0.7749]$;
+$r = [9.7548\ -11.1478\ 3.0818]$
+\subsection {Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
+\subsection {Observatii legate de rezultatele obtinute: }
 
 \section {PROIECTARE REGULATOR RST-1 - WINPIM }
 a
@@ -760,21 +877,21 @@ a
 
 \section {CALCUL REGULATOR RST-2, SIMULARE SI VALIDARE }
 a
-\subsection {8.1. Platforma laborator 8 - citită }
-\subsection {8.2. [2p] Regulatorul RST 1 si-a indeplinit sau nu performantele impuse ?  Daca nu, ce masuri se iau (ce specificatii noi se impun fata de primul design ) ? }
-\subsection {8.3. [4p] Regulatorul RST 1 indeplineste marginile standard de robustete (se pot verifica cu aplicatia WinPIM)?   Figura cu functia de sensibilitate si template este furnizata aici. }
-\subsection {8.4. [4p] In cazul in care regulatorul a trebuit recalculat acesta este descris de polinoamele: }
-\subsection {8.5. [2p] Rezultatele in simulare sunt furnizate in figura urmatoare: }
-\subsection {8.6. [2p] Functia de sensibilitate a noii solutii: }
+\subsection {Platforma laborator 8 - citită }
+\subsection {[2p] Regulatorul RST 1 si-a indeplinit sau nu performantele impuse ?  Daca nu, ce masuri se iau (ce specificatii noi se impun fata de primul design ) ? }
+\subsection {[4p] Regulatorul RST 1 indeplineste marginile standard de robustete (se pot verifica cu aplicatia WinPIM)?   Figura cu functia de sensibilitate si template este furnizata aici. }
+\subsection {[4p] In cazul in care regulatorul a trebuit recalculat acesta este descris de polinoamele: }
+\subsection {[2p] Rezultatele in simulare sunt furnizate in figura urmatoare: }
+\subsection {[2p] Functia de sensibilitate a noii solutii: }
 
 \section {Evaluare Experimentala Regulator RST-2 }
 a
-\subsection {9.1. [3p] Evaluare performante pe sistemul real. }
+\subsection {[3p] Evaluare performante pe sistemul real. }
 \subsubsection {Se alege referinta r(t) = a.i. u(t) stationar sa fie egal cu u0. Pentru aceasta referinta s-a stimulat sistemul si s-a aplicat si o perturbatie cand a ajuns in regimul stationar de cca.\% }
 \subsubsection {Rezultatul simularii se afla in imaginea de mai jos: }
 \subsubsection {[2p] Alegand o alta referinta raspunsul sistemului este capturat in figura de mai jos: }
-\subsection {9.2.[2p] Performantele se regasesc rezumate in tabelul urmator }
-\subsection {9.3.[1p] Comentarii privind calitatea solutiei obtinute vs specificatiile impuse: }
+\subsection {[2p] Performantele se regasesc rezumate in tabelul urmator }
+\subsection {[1p] Comentarii privind calitatea solutiei obtinute vs specificatiile impuse: }
 
 \section {CONCLUZII GENERALE SI FEEDBACK PROIECT }
 a
