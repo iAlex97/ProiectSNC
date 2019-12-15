@@ -821,27 +821,74 @@ Am introdus aceste valori in WinReg, dupa cum urmeaza:
     \caption{Polinoame regulator}
 \end{table}
 
-\begin{center}
-  \fbox{ \includegraphics[width=0.8\textwidth]{winreg/6_2_1.png}}
-\end{center}
-
 \subsection {Fisierul WinReg cu regulator si model este aici. }
-
+Regulatorul poate fi gasit la: $./regulatoare/rst1.reg$
 
 \subsection {Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
+
+Simulare cu perturbatie determinista de tip treapta:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winreg/6_4_1.png}}
+\end{center}
+
+Simulare cu perturbatia anterioara si perturbatii stocastice:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winreg/6_4_2.png}}
+\end{center}
+
 \subsection {Observatii legate de rezultatele obtinute: }
+\begin{itemize}
+  \item Sistemul urmareste referinta si rejecteaza perturbatia de tip treapta
+  \item La aparitia preturbatiei, se produce un spike de amplitudine mica ce poate afecta stabilitatea instalatiei
+  \item Sistemul este stabil si atunci cand este afecatat de o perturbatie stochastica de amplitudine mica 
+  \item Cerintele de urmarire a referintei si rejectie a perturbatiei sunt indeplinite
+\end{itemize}
 
 \section {EVALUARE EXPERIMENTALA REGULATOR RST-1 }
-a
 \subsection {7.1. Evaluare performante pe sistemul real. }
-\subsubsection {Se alege referinta r(t) = a.i. u(t) stationar sa fie egal cu u0. Pentru aceasta referinta s-a stimulat sistemul si s-a aplicat si o perturbatie cand a ajuns in regimul stationar de cca.}
+\subsubsection {Se alege referinta r(t) a.i. u(t) stationar sa fie egal cu u0. Pentru aceasta referinta s-a stimulat sistemul}
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|}
+      \hline
+       $r(t)$ & $3.1\ V$ \\
+      \hline
+       $u_{st}(t)$ & $\approx70\ \%$ \\
+      \hline
+    \end{tabular}
+    \caption{Alegerea referintei}
+\end{table}
+
 \subsubsection {Rezultatul simularii se afla in imaginea de mai jos: }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{7_1_2_1.eps}}
+\end{center}
+
 \subsubsection {[2p] Alegand o alta referinta raspunsul sistemului este capturat in figura de mai jos: }
-\subsection {7.2. Performantele se regasesc rezumate in tabelul urmator }
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{7_1_2_2.eps}}
+\end{center}
+
+\subsection {Performantele se regasesc rezumate in tabelul urmator }
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+       $\sigma$ & $t_c$ & $t_t$ & $\varepsilon_{st}$ \\
+      \hline
+       $\approx36\ \%$ & $ 2.61\ s$ & $ 26.07\ s$ & $0$ \\
+      \hline
+    \end{tabular}
+    \caption{Performante obtinute}
+\end{table}
+
 \subsection {7.3. Comentarii privind calitatea solutiei obtinute vs specificatiile impuse: }
+\begin{itemize}
+  \item Performantele impuse de suprareglaj si timp tranzitoriu nu au putut fi indeplinite simultan cu un regulator ce produce o iesire stabila
+  \item Eroarea stationara este 0, sistemul obtinut rejectand perturbatiile
+\end{itemize}
 
 \section {CALCUL REGULATOR RST-2, SIMULARE SI VALIDARE }
-a
 \subsection {8.1. Platforma laborator 8 - citită }
 \subsection {8.2. [2p] Regulatorul RST 1 si-a indeplinit sau nu performantele impuse ?  Daca nu, ce masuri se iau (ce specificatii noi se impun fata de primul design ) ? }
 \subsection {8.3. [4p] Regulatorul RST 1 indeplineste marginile standard de robustete (se pot verifica cu aplicatia WinPIM)?   Figura cu functia de sensibilitate si template este furnizata aici. }
