@@ -768,7 +768,7 @@ Inlocuim si rezolvam sistemul:
 
 \subsection {Pentru ca sistemul sa ofere timp de raspuns minim si suprareglaj < 5\% se aleg:}
 $s = [2.3625]$
-$r = [51.6868 - 0.8784i -21.7715 + 0.0000i   0.0000 + 0.0000i]$
+$r = [51.6868 - 0.8784i\ \ -21.7715 + 0.0000i\ \ 0.0000 + 0.0000i]$
 \subsection {Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
 \subsection {Observatii legate de rezultatele obtinute: }
 
@@ -779,13 +779,57 @@ $r = [51.6868 - 0.8784i -21.7715 + 0.0000i   0.0000 + 0.0000i]$
 \subsection {Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
 \subsection {Observatii legate de rezultatele obtinute: }
 
-\section {PROIECTARE REGULATOR RST-1 - WINPIM }
-a
-\subsection {6.1. Specificare performante in urmarire respectiv in reglare: }
-\subsection {6.2. Pentru regulatorul calculat folosind metoda Pole Placement, cu integrator, polinoamele R,S,T sunt: }
-\subsection {6.3. Fisierul WinPim cu regulator si model este aici. }
-\subsection {6.4. Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
-\subsection {6.5. Observatii legate de rezultatele obtinute: }
+\section {PROIECTARE REGULATOR RST-1 - WINREG }
+\subsection {Specificare performante in urmarire respectiv in reglare: }
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|l|}
+      \hline
+       & $\omega_n$ & $\zeta$ \\
+      \hline
+       Reglare & 1.3605 & 0.98 \\
+      \hline
+       Urmarire & 0.2700 & 0.9 \\
+      \hline
+    \end{tabular}
+    \caption{Performante impuse}
+\end{table}
+
+Am introdus aceste valori in WinReg, dupa cum urmeaza:
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winreg/6_1_1.png}}
+\end{center}
+
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winreg/6_1_2.png}}
+\end{center}
+
+\subsection {Pentru regulatorul calculat folosind metoda Pole Placement, cu integrator, polinoamele R,S,T sunt: }
+\begin{table}[H]
+  \centering
+    \begin{tabular}{|l|l|}
+      \hline
+       $R(q^{-1})$ & $0.007993q^{-2}-0.897038q^{-1}+0.993165$\\
+      \hline
+       $S(q^{-1})$ & $q^{-2}-0.75029q^{-1}-0.24971$\\
+      \hline
+       $T(q^{-1})$ & $14.204545q^{-2}-26.200142q^{-1}+12.099716$\\
+      \hline
+       $B_m(q^{-1})/A_m(q^{-1})$ & $(0.03048q^{-1} + 0.02556)/(q^{-2}-1.533754q^{-1}+0.589793)$ \\
+      \hline
+    \end{tabular}
+    \caption{Polinoame regulator}
+\end{table}
+
+\begin{center}
+  \fbox{ \includegraphics[width=0.8\textwidth]{winreg/6_2_1.png}}
+\end{center}
+
+\subsection {Fisierul WinReg cu regulator si model este aici. }
+
+
+\subsection {Simulare sistem in bucla inchisa (comanda, referinta, iesirea), in conditii de perturbatii treapta (25\% amplitudine) aplicate dupa stabilizarea sistemului fata de referinta. Graficele sunt prezentate aici: }
+\subsection {Observatii legate de rezultatele obtinute: }
 
 \section {EVALUARE EXPERIMENTALA REGULATOR RST-1 }
 a
